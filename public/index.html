@@ -1,36 +1,63 @@
 <!doctype html>
 <html ng-app="refidApp">
     <head>
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
         <script src="js/app.js"></script>
     </head>
     <body>
-        <div ng-controller="regidCtrl">
-            <form ng-submit="addData(thing,ans)">
-                keyword
-                <input type="text" ng-model="thing"><br>
-                คำตอบ
-                <input type="text" ng-model="ans"><br>
-                <input type="submit" value="Add Keyword"/>
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo center">Manage Keyword Bot facebook</a>
+            </div>
+        </nav>
+        <br><br>
+        <div ng-controller="regidCtrl" class="container">
+
+            <div class="row">
+                <form class="col s12" ng-submit="addData(thing,ans)">
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input placeholder="Keyword" id="first_name" type="text"  ng-model="thing">
+                            <label for="first_name">Keyword</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="last_name" placeholder="Answer" type="text" ng-model="ans">
+                            <label for="last_name">Answer</label>
+                        </div>
+                        <div class="input-field col s12 center">
+                            <input type="submit" class="btn" value="Add Keyword"/></center>
+                    </div>
+                </div>
             </form>
+        </div>
+        <br>
+        <hr>
+        <table class="striped">
 
-            <table>
+            <thead>
+                <tr>
 
-                    <thead>
-                        <td >
-                            Keyword
-                        </td>
-                        <td >
-                            คำตอบ
-                        </td>
-                        <td>
-                            edit
-                        </td>
-                        <td>
-                            delete
-                        </td>
-                    </thead>
-
+                    <th >
+                        Keyword
+                    </th>
+                    <th >
+                        Answer
+                    </th>
+                    <th width="100">
+                        Edit
+                    </th>
+                    <th width="100">
+                        Delete
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
 
                 <tr ng-repeat="(key,val) in data">
 
@@ -41,21 +68,25 @@
                         {{val.ans}}
                     </td>
                     <td ng-hide="key===editkey">
-                        <button type="button" ng-click="editbutkey(key)">edit</button>
+                        <button type="button" class="btn orange" ng-click="editbutkey(key)">Edit</button>
                     </td>
                     <td ng-hide="key===editkey">
-                        <button type="button" ng-click="deleteData(key)">delete</button>
+                        <button type="button" class="btn red" ng-click="deleteData(key)">Delete</button>
                     </td>
                     <td ng-show="key===editkey">
                         <input type="text" ng-model="val.ans">
                     </td>
                     <td ng-show="key===editkey">
-                      <button type="button" ng-click="editData(key,val.ans)">done</button>
+                        <button type="button" class="btn" ng-click="editData(key,val.ans)">Done</button>
+                    </td>
+                    <td ng-show="key===editkey">
+                        <button type="button" class="btn red" ng-click="cancel()">Cancel</button>
                     </td>
 
                 </tr>
-            </table>
+            </tbody>
+        </table>
 
-        </div>
-    </body>
+    </div>
+</body>
 </html>

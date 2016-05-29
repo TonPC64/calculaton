@@ -38,4 +38,7 @@ angular.module('refidApp', [])
     $scope.editbutkey = function (key) {
       $scope.editkey = key
     }
+    $scope.cancel = function () {
+      $scope.editkey = ''
+    }
   })
