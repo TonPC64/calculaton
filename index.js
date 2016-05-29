@@ -42,6 +42,7 @@ app.post('/webhook/', function (req, res) {
     var sender = event.sender.id
     if (event.message && event.message.text) {
       var text = event.message.text.split(' ')
+
       if (text[0] === 'sum') {
         var ans = parseInt(text[1], 0) + parseInt(text[2], 0)
         sendTextMessage(sender, ans)
@@ -58,6 +59,10 @@ app.post('/webhook/', function (req, res) {
         ans = sum / text.length
         sendTextMessage(sender, ans)
       }
+
+      text.forEach((element, index, array) => {
+        console.log(element)
+      })
     /*
     var textSlice = event.message.text.split(' ')
     var thig = textSlice[textSlice.length - 1].split('?')[0]
