@@ -1,22 +1,39 @@
 <!doctype html>
 <html ng-app="refidApp">
-  <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
-    <script src="js/app.js"></script>
-  </head>
-  <body>
-    <div ng-controller="regidCtrl">
+    <head>
+        <script src="js/angular.min.js"></script>
+        <script src="js/app.js"></script>
+    </head>
+    <body>
+        <div ng-controller="regidCtrl">
+            <form ng-submit = "(addData(thing,ans)")>
+                keyword
+                <input type="text" ng-model="thing"><br>
+                คำตอบ
+                <input type="text" ng-model="ans"><br>
+                <button type="button" ng-click="(addData(thing,ans)">Add</button>
+            </form>
 
-              <div ng-repeat="(key,val) in data">
-                {{key}}
-                {{val.amount}} {{val.unit }}
-              </div>
+            <table>
+                <tr>
+                    <td>
+                        Keyword
+                    </td>
+                    <td>
+                        คำตอบ
+                    </td>
+                </tr>
 
-              ชื่อ <input type="text" ng-model="thing"><br>
-              จำนวน <input type="text" ng-model="amount" onkeypress='return event.charCode >= 48 && event.charCode <= 57'><br>
-              หน่วย <input type="text" ng-model="unit"><br>
-              <button type="button" ng-click="addData(thing,amount,unit)">Add</button>
+                <tr ng-repeat="(key,val) in data">
+                        <td>
+                            {{key}}
+                        </td>
+                        <td>
+                            {{val.ans}}
+                        </td>
+                </tr>
+            </table>
 
-    </div>
-  </body>
+        </div>
+    </body>
 </html>

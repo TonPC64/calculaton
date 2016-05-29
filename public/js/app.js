@@ -5,14 +5,13 @@ angular.module('refidApp', [])
       $scope.data = req
     })
 
-    $scope.addData = function (thing, amount, unit) {
-      $http.post('/data', {key: thing,amount: amount,unit: unit}).success(function (req, res) {
+    $scope.addData = function (thing, ans) {
+      $http.post('/data', {key: thing, ans: ans}).success(function (req, res) {
         $http.get('/data').success(function (req, res) {
           $scope.data = req
         })
       })
       $scope.thing = ''
-      $scope.amount = ''
-      $scope.unit = ''
+      $scope.ans = ''
     }
   })
