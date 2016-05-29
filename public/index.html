@@ -6,31 +6,53 @@
     </head>
     <body>
         <div ng-controller="regidCtrl">
-
+            <form ng-submit="addData(thing,ans)">
                 keyword
                 <input type="text" ng-model="thing"><br>
                 คำตอบ
                 <input type="text" ng-model="ans"><br>
-                <button type="button" ng-click="addData(thing,ans)">Add</button>
-
+                <input type="submit" value="Add Keyword"/>
+            </form>
 
             <table>
-                <tr>
-                    <td>
-                        Keyword
-                    </td>
-                    <td>
-                        คำตอบ
-                    </td>
-                </tr>
+
+                    <thead>
+                        <td >
+                            Keyword
+                        </td>
+                        <td >
+                            คำตอบ
+                        </td>
+                        <td>
+                            edit
+                        </td>
+                        <td>
+                            delete
+                        </td>
+                    </thead>
+
 
                 <tr ng-repeat="(key,val) in data">
-                        <td>
-                            {{key}}
-                        </td>
-                        <td>
-                            {{val.ans}}
-                        </td>
+
+                    <td>
+                        {{key}}
+                    </td>
+                    <td ng-hide="key===editkey">
+                        {{val.ans}}
+                    </td>
+                    <td ng-hide="key===editkey">
+                        <button type="button" ng-click="editbutkey(key)">edit</button>
+                    </td>
+                    <td ng-hide="key===editkey">
+                        <button type="button" ng-click="deleteData(key)">delete</button>
+                    </td>
+                    <td ng-show="key===editkey">
+                        <input type="text" ng-model="val.ans">
+                    </td>
+                    <td ng-show="key===editkey">
+                      <button type="button" ng-click="editData(key,val.ans)">done</button>
+                    </td>
+
                 </tr>
             </table>
 

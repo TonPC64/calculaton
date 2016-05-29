@@ -35,6 +35,20 @@ app.post('/data', jsonParser, function (req, res) {
   res.send(keyword)
 })
 
+app.post('/data/edit', jsonParser, function (req, res) {
+  var data = req.body
+  keyword[data.key].ans = data.ans
+  console.log(keyword)
+  res.send(keyword)
+})
+
+app.post('/data/delete', jsonParser, function (req, res) {
+  var data = req.body
+  delete keyword[data.key]
+  console.log(keyword)
+  res.send(keyword)
+})
+
 app.post('/webhook/', function (req, res) {
   var messaging_events = req.body.entry[0].messaging
   for (var i = 0; i < messaging_events.length; i++) {
@@ -65,44 +79,6 @@ app.post('/webhook/', function (req, res) {
           sendTextMessage(sender, keyword[element].ans)
         }
       })
-    /*
-    var textSlice = event.message.text.split(' ')
-    var thig = textSlice[textSlice.length - 1].split('?')[0]
-    console.log(thig, qustion)
-    if (text === qustion[0]) {
-      str = 'Have '
-      Object.keys(refrigerator).forEach(function (item) {
-        str += item + ', '
-      })
-      sendTextMessage(sender, str)
-    }else if (textSlice[0] + ' ' + textSlice[1] === qustion[1]) {
-      console.log(thig)
-      if (refrigerator[thig]) {
-        sendTextMessage(sender, refrigerator[thig].amount + ' ' + refrigerator[thig].unit)
-      } else {
-        sendTextMessage(sender, "Don't Have")
-      }
-    }else if (textSlice[0] + ' ' + textSlice[1] + ' ' + textSlice[2] === qustion[2]) {
-      console.log(thig)
-      if (refrigerator[thig]) {
-        sendTextMessage(sender, 'Have ' + refrigerator[thig].amount + ' ' + refrigerator[thig].unit)
-      } else {
-        sendTextMessage(sender, "Don't Have")
-      }
-    }else if (textSlice[0] === qustion[3]) {
-      console.log(thig)
-      if (!refrigerator[textSlice[1]]) {
-        refrigerator[textSlice[1]] = {
-          amount: textSlice[2],
-          unit: textSlice[3]
-        }
-      } else {
-        refrigerator[textSlice[1]].amount = parseInt(refrigerator[textSlice[1]].amount, 0) + parseInt(textSlice[2], 0)
-      }
-      sendTextMessage(sender, 'Done')
-    } else {
-      console.log(textSlice[0] + ' ' + textSlice[1])
-    }*/
     }
   }
   res.sendStatus(200)
