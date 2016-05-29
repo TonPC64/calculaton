@@ -45,6 +45,12 @@ app.post('/webhook/', function (req, res) {
       if (text[0] === 'sum') {
         var ans = parseInt(text[1], 0) + parseInt(text[2], 0)
         sendTextMessage(sender, ans)
+      } else if (text[0] === 'max') {
+        ans = parseInt(text[1], 0) > parseInt(text[2], 0) ? parseInt(text[1], 0) : parseInt(text[2], 0)
+        sendTextMessage(sender, ans)
+      } else if (text[0] === 'min') {
+        ans = parseInt(text[1], 0) < parseInt(text[2], 0) ? parseInt(text[1], 0) : parseInt(text[2], 0)
+        sendTextMessage(sender, ans)
       }
     /*
     var textSlice = event.message.text.split(' ')
