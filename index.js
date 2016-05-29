@@ -51,6 +51,11 @@ app.post('/webhook/', function (req, res) {
       } else if (text[0] === 'min') {
         ans = parseInt(text[1], 0) < parseInt(text[2], 0) ? parseInt(text[1], 0) : parseInt(text[2], 0)
         sendTextMessage(sender, ans)
+      } else if (text[0] === 'avg') {
+        text.splice(0, 1)
+        var sum = text.reduce((sum, item) => sum + item.price, 0)
+        ans = sum / text.length
+        sendTextMessage(sender, ans)
       }
     /*
     var textSlice = event.message.text.split(' ')
