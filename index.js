@@ -43,7 +43,7 @@ app.post('/webhook/', function (req, res) {
     if (event.message && event.message.text) {
       var text = event.message.text.split(' ')
       if (text[0] === 'sum') {
-        var ans = text[1] + text[2]
+        var ans = parseInt(text[1], 0) + parseInt(text[2], 0)
         sendTextMessage(sender, ans)
       }
     /*
