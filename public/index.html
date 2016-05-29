@@ -1,0 +1,22 @@
+<!doctype html>
+<html ng-app="refidApp">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="js/app.js"></script>
+  </head>
+  <body>
+    <div ng-controller="regidCtrl">
+
+              <div ng-repeat="(key,val) in data">
+                {{key}}
+                {{val.amount}} {{val.unit }}
+              </div>
+
+              ชื่อ <input type="text" ng-model="thing"><br>
+              จำนวน <input type="text" ng-model="amount" onkeypress='return event.charCode >= 48 && event.charCode <= 57'><br>
+              หน่วย <input type="text" ng-model="unit"><br>
+              <button type="button" ng-click="addData(thing,amount,unit)">Add</button>
+
+    </div>
+  </body>
+</html>
