@@ -53,7 +53,8 @@ app.post('/webhook/', function (req, res) {
         sendTextMessage(sender, ans)
       } else if (text[0] === 'avg') {
         text.splice(0, 1)
-        var sum = text.reduce((prev, curr) => prev + parseInt(curr, 0))
+        var sum = text.reduce((prev, curr) => prev + parseInt(curr, 0), 0)
+        console.log(sum)
         ans = sum / text.length
         sendTextMessage(sender, ans)
       }
