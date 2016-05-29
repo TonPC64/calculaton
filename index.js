@@ -3,18 +3,13 @@ var bodyParser = require('body-parser')
 var jsonParser = bodyParser.json()
 var app = express()
 var request = require('request')
-var refrigerator = {
-  changeCan: {
-    amount: 40,
-    unit: 'can'
-  },
-  LeoCan: {
-    amount: 40,
-    unit: 'can'
+var keyword = {
+  hi: {
+    ans: 'hi'
   }
 }
 
-var qustion = ['What Do you have?', 'How much', 'Do you have' , 'Add']
+var qustion = ['What Do you have?', 'How much', 'Do you have', 'Add']
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -29,20 +24,17 @@ app.get('/webhook/', function (req, res) {
 })
 
 app.get('/data', function (req, res) {
-  res.send(refrigerator)
+  res.send(keyword)
 })
 
 app.post('/data', jsonParser, function (req, res) {
   var data = req.body
-  if (!refrigerator[data.key]) {
-    refrigerator[data.key] = {
-      amount: data.amount,
-      unit: data.unit
+  if (!keyword[data.key]) {
+    keyword[data.key] = {
+      ans: data.ans,
     }
-  } else {
-    refrigerator[data.key].amount = parseInt(refrigerator[data.key].amount, 0) + parseInt(data.amount, 0)
   }
-  res.send(refrigerator)
+  res.send(keyword)
 })
 
 app.post('/webhook/', function (req, res) {
@@ -53,6 +45,9 @@ app.post('/webhook/', function (req, res) {
     var sender = event.sender.id
     if (event.message && event.message.text) {
       var text = event.message.text
+      var textSlice = event.message.text.split(' ')
+      console.log(textSlice);
+      /*
       var textSlice = event.message.text.split(' ')
       var thig = textSlice[textSlice.length - 1].split('?')[0]
       console.log(thig, qustion)
@@ -89,7 +84,10 @@ app.post('/webhook/', function (req, res) {
         sendTextMessage(sender, 'Done')
       } else {
         console.log(textSlice[0] + ' ' + textSlice[1])
-      }
+      }*/
+
+
+
     }
   }
   res.sendStatus(200)
