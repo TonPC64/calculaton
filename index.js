@@ -37,7 +37,9 @@ app.post('/data', jsonParser, function (req, res) {
 
 app.post('/data/edit', jsonParser, function (req, res) {
   var data = req.body
+  console.log(data)
   keyword[data.key].ans = data.ans
+  rename(keyword, data.key, data.newkey)
   console.log(keyword)
   res.send(keyword)
 })
@@ -48,6 +50,16 @@ app.post('/data/delete', jsonParser, function (req, res) {
   console.log(keyword)
   res.send(keyword)
 })
+
+function rename (obj, oldName, newName) {
+  if (!obj.hasOwnProperty(oldName)) {
+    return false
+  }
+
+  obj[newName] = obj[oldName]
+  delete obj[oldName]
+  return true
+}
 
 app.post('/webhook/', function (req, res) {
   var messaging_events = req.body.entry[0].messaging

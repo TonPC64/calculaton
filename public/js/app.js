@@ -15,13 +15,15 @@ angular.module('refidApp', [])
       $scope.ans = ''
     }
 
-    $scope.editData = function (thing, ans) {
-      $http.post('/data/edit', {key: thing, ans: ans}).success(function (req, res) {
+    $scope.editData = function (thing, ans, newkey) {
+      console.log({key: thing, ans: ans, newkey: newkey})
+      $http.post('/data/edit', {key: thing, ans: ans, newkey: newkey}).success(function (req, res) {
         $http.get('/data').success(function (req, res) {
           $scope.data = req
           $scope.editkey = ''
         })
       })
+
     }
 
     $scope.deleteData = function (key) {
@@ -35,8 +37,9 @@ angular.module('refidApp', [])
       }
     }
 
-    $scope.editbutkey = function (key) {
-      $scope.editkey = key
+    $scope.editbutkey = function (index, key) {
+      $scope.oldkey = key
+      $scope.editkey = index
     }
     $scope.cancel = function () {
       $scope.editkey = ''

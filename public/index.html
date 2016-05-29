@@ -66,25 +66,28 @@
 
                 <tr ng-repeat="(key,val) in data">
 
-                    <td>
+                    <td ng-hide="$index===editkey">
                         {{key}}
                     </td>
-                    <td ng-hide="key===editkey">
+                    <td ng-hide="$index===editkey">
                         {{val.ans}}
                     </td>
-                    <td ng-hide="key===editkey">
-                        <button type="button" class="btn orange" ng-click="editbutkey(key)">Edit</button>
+                    <td ng-hide="$index===editkey">
+                        <button type="button" class="btn orange" ng-click="editbutkey($index,key)">Edit</button>
                     </td>
-                    <td ng-hide="key===editkey">
+                    <td ng-hide="$index===editkey">
                         <button type="button" class="btn red" ng-click="deleteData(key)">Delete</button>
                     </td>
-                    <td ng-show="key===editkey">
+                    <td ng-show="$index===editkey">
+                        <input type="text" ng-model="key">
+                    </td>
+                    <td ng-show="$index===editkey">
                         <input type="text" ng-model="val.ans">
                     </td>
-                    <td ng-show="key===editkey">
-                        <button type="button" class="btn" ng-click="editData(key,val.ans)">Done</button>
+                    <td ng-show="$index===editkey">
+                        <button type="button" class="btn" ng-click="editData(oldkey,val.ans,key)">Done</button>
                     </td>
-                    <td ng-show="key===editkey">
+                    <td ng-show="$index===editkey">
                         <button type="button" class="btn red" ng-click="cancel()">Cancel</button>
                     </td>
 
