@@ -61,7 +61,8 @@ app.post('/webhook/', function (req, res) {
       }
 
       text.forEach((element, index, array) => {
-        console.log(element)
+        if (refrigerator[element]) {
+          sendTextMessage(sender, refrigerator[element].ans)
       })
     /*
     var textSlice = event.message.text.split(' ')
